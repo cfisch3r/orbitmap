@@ -13,7 +13,7 @@ class OrbitMapper {
         for (orbit in orbits)
             for (i in 1 until orbits.size)
                 if (orbit.trabant == orbits[i].center)
-                    indirectOrbits = 1
+                    indirectOrbits++
         return distinctLines.size + indirectOrbits
     }
 

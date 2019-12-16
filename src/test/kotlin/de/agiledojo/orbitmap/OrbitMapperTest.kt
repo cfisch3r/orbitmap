@@ -36,6 +36,11 @@ class OrbitMapperTest : StringSpec()  {
             numberOfOrbits shouldBe 5
         }
 
+        "multiple indirect Orbits are counted" {
+            val numberOfOrbits = mapper.numberOfOrbits("N)M\nA)B\nY)X\nB)C\nB)D")
+            numberOfOrbits shouldBe 7
+        }
+
         "planet with separated two planets in orbit" {
             val numberOfOrbits = mapper.numberOfOrbits("A)B\nA)C")
             numberOfOrbits shouldBe 2
