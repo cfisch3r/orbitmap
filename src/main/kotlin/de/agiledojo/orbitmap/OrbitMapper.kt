@@ -10,11 +10,22 @@ class OrbitMapper {
         val orbits = distinctLines.map { line -> Orbit(line) }
         var indirectOrbits = 0
 
-        for (orbit in orbits)
-            for (i in 1 until orbits.size)
-                if (orbit.trabant == orbits[i].center)
-                    indirectOrbits++
+        for (orbit in orbits) {
+            indirectOrbits += countIndirectOrbits(orbits, orbit)
+        }
         return distinctLines.size + indirectOrbits
+    }
+
+    private fun countIndirectOrbits(orbits: List<Orbit>, orbit: Orbit): Int {
+        var indirectOrbits = 0
+        for (otherOrbit in orbits) {
+            if (orbit.trabant == otherOrbit.center) {
+                indirectOrbits++
+                indirectOrbits += countIndirectOrbits(orbits,otherOrbit)
+            }
+        }
+
+        return indirectOrbits
     }
 
 }

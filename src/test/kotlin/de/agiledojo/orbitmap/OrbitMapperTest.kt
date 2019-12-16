@@ -32,13 +32,18 @@ class OrbitMapperTest : StringSpec()  {
         }
 
         "indirect Orbits are also counted" {
-            val numberOfOrbits = mapper.numberOfOrbits("N)M\nA)B\nY)X\nB)C")
+            val numberOfOrbits = mapper.numberOfOrbits("N)M\nB)C\nY)X\nA)B")
             numberOfOrbits shouldBe 5
         }
 
         "multiple indirect Orbits are counted" {
             val numberOfOrbits = mapper.numberOfOrbits("N)M\nA)B\nY)X\nB)C\nB)D")
             numberOfOrbits shouldBe 7
+        }
+
+        "transient indirect Orbits are counted" {
+            val numberOfOrbits = mapper.numberOfOrbits("A)B\nB)C\nC)D")
+            numberOfOrbits shouldBe 6
         }
 
         "planet with separated two planets in orbit" {
