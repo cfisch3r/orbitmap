@@ -7,7 +7,14 @@ class OrbitMapper {
 
         val lines = orbitmap.split("\n")
         val distinctLines = lines.distinct()
-        return distinctLines.size
+        val orbits = distinctLines.map { line -> Orbit(line) }
+        var indirectOrbits = 0
+
+        for (orbit in orbits)
+            for (i in 1 until orbits.size)
+                if (orbit.trabant == orbits[i].center)
+                    indirectOrbits = 1
+        return distinctLines.size + indirectOrbits
     }
 
 }
