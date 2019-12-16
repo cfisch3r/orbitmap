@@ -1,11 +1,10 @@
 package de.agiledojo.orbitmap
 
-import io.kotlintest.Description
 import io.kotlintest.TestCase
 import io.kotlintest.shouldBe
-import io.kotlintest.specs.WordSpec
+import io.kotlintest.specs.StringSpec
 
-class OrbitMapperTest : WordSpec()  {
+class OrbitMapperTest : StringSpec()  {
 
     private lateinit var mapper: OrbitMapper
 
@@ -16,14 +15,15 @@ class OrbitMapperTest : WordSpec()  {
 
     init {
 
-        "Sum of orbits" should {
+        "Sum of orbits should be 0 for an empty Orbit Map" {
             val numberOfOrbits = mapper.numberOfOrbits("")
-
-            "be 0 for an empty Orbit Map" {
-                numberOfOrbits shouldBe 0
-            }
+            numberOfOrbits shouldBe 0
         }
 
+        "Sum of orbits should be 1 for an Orbit Map with two planets" {
+            val numberOfOrbits = mapper.numberOfOrbits("A)B")
+            numberOfOrbits shouldBe 1
+        }
     }
 
 }
