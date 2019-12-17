@@ -51,6 +51,21 @@ class OrbitMapperTest : StringSpec()  {
             numberOfOrbits shouldBe 2
         }
 
+        "complex example should work" {
+            val numberOfOrbits = mapper.numberOfOrbits("COM)B\n" +
+                    "B)C\n" +
+                    "C)D\n" +
+                    "D)E\n" +
+                    "E)F\n" +
+                    "B)G\n" +
+                    "G)H\n" +
+                    "D)I\n" +
+                    "E)J\n" +
+                    "J)K\n" +
+                    "K)L")
+            numberOfOrbits shouldBe 42
+        }
+
         "!Sum of orbits should be 3 for an Orbit Map with 2 independent and 1 indirect Orbits" {
             val numberOfOrbits = mapper.numberOfOrbits("A)B\nB)C")
             numberOfOrbits shouldBe 3
