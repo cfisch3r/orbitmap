@@ -1,29 +1,28 @@
 package de.agiledojo.orbitmap
 
 class OrbitMapper {
+
     fun numberOfOrbits(orbitmap: String): Int {
         if (orbitmap.isEmpty())
             return 0
 
-        val lines = orbitmap.split("\n")
-        val distinctLines = lines.distinct()
-        val orbits = distinctLines.map { line -> Orbit(line) }
-        var indirectOrbits = 0
+        val orbits = orbitsFromMap(orbitmap)
 
-        for (orbit in orbits) {
-            indirectOrbits += countIndirectOrbits(orbits, orbit)
-        }
-        return distinctLines.size + indirectOrbits
+        return orbits.fold(orbits.size,{ orbitcount,orbit-> orbitcount + orbits.indirectOrbits(orbit)})
+
     }
 
-    private fun countIndirectOrbits(orbits: List<Orbit>, orbit: Orbit): Int {
+    private fun orbitsFromMap(orbitmap: String): List<Orbit> {
+        return orbitmap
+                .split("\n")
+                .distinct()
+                .map { line -> Orbit(line) }
+    }
+
+    private fun List<Orbit>.indirectOrbits(otherOrbit: Orbit): Int {
         var indirectOrbits = 0
-        for (otherOrbit in orbits) {
-            if (orbit.trabant == otherOrbit.center) {
-                indirectOrbits++
-                indirectOrbits += countIndirectOrbits(orbits,otherOrbit)
-            }
-        }
+        for (orbit in this)
+            if (orbit.center == otherOrbit.trabant) indirectOrbits += 1 + this.indirectOrbits(orbit)
 
         return indirectOrbits
     }
