@@ -34,7 +34,7 @@ class OrbitMapperTest : StringSpec()  {
                 mapper.numberOfOrbits("A)B\nC)D\nA)B") shouldBe 2
         }
 
-        "single orbits are counted" {
+        "single indirect orbit is counted" {
             val numberOfOrbits = mapper.numberOfOrbits("N)M\nB)C\nY)X\nA)B")
             numberOfOrbits shouldBe 5
         }
@@ -44,7 +44,7 @@ class OrbitMapperTest : StringSpec()  {
             numberOfOrbits shouldBe 7
         }
 
-        "transient indirect Orbits are counted" {
+        "transient indirect orbits are counted" {
             val numberOfOrbits = mapper.numberOfOrbits("A)B\nB)C\nC)D")
             numberOfOrbits shouldBe 6
         }
