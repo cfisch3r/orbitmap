@@ -75,6 +75,13 @@ class OrbitMapperTest : StringSpec()  {
             }
             exception.message should startWith("Objects cannot be in their own orbit")
         }
+
+        "invalid orbit definitions are not accepted" {
+            val exception = shouldThrow<IllegalArgumentException> {
+                mapper.numberOfOrbits("xyz")
+            }
+            exception.message should startWith("Invalid orbit definition")
+        }
     }
 
 }
