@@ -3,14 +3,18 @@ package de.agiledojo.orbitmap
 import java.lang.IllegalArgumentException
 
 internal class Orbit(orbitDefinition: String) {
-    val center: String
-    val trabant: String
+    private val center: String
+    private val trabant: String
 
     init {
         val items = orbitDefinition.split(")")
         validate(items)
         center = items[0]
         trabant = items[1]
+    }
+
+    fun isCoupledTo(other: Orbit): Boolean {
+        return this.center == other.trabant
     }
 
     private fun validate(items: List<String>) {

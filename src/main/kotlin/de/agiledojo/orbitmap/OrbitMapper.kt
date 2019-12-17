@@ -9,7 +9,6 @@ class OrbitMapper {
         val orbits = orbitsFromMap(orbitmap)
 
         return orbits.fold(orbits.size,{ orbitcount,orbit-> orbitcount + orbits.indirectOrbits(orbit)})
-
     }
 
     private fun orbitsFromMap(orbitmap: String): List<Orbit> {
@@ -22,7 +21,7 @@ class OrbitMapper {
     private fun List<Orbit>.indirectOrbits(otherOrbit: Orbit): Int {
         var indirectOrbits = 0
         for (orbit in this)
-            if (orbit.center == otherOrbit.trabant) indirectOrbits += 1 + this.indirectOrbits(orbit)
+            if (orbit.isCoupledTo(otherOrbit)) indirectOrbits += 1 + this.indirectOrbits(orbit)
 
         return indirectOrbits
     }
