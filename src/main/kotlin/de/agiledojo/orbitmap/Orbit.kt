@@ -1,6 +1,8 @@
 package de.agiledojo.orbitmap
 
-class Orbit(orbitDefinition: String) {
+import java.lang.IllegalArgumentException
+
+internal class Orbit(orbitDefinition: String) {
     val center: String
     val trabant: String
 
@@ -8,5 +10,6 @@ class Orbit(orbitDefinition: String) {
         val items = orbitDefinition.split(")")
         center = items[0]
         trabant = items[1]
+        if (center == trabant) throw IllegalArgumentException("Objects cannot be in their own orbit")
     }
 }
