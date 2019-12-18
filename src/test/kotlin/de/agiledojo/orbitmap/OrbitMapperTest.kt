@@ -55,17 +55,19 @@ class OrbitMapperTest : StringSpec()  {
         }
 
         "complex example should work" {
-            val numberOfOrbits = mapper.numberOfOrbits("COM)B\n" +
-                    "B)C\n" +
-                    "C)D\n" +
-                    "D)E\n" +
-                    "E)F\n" +
-                    "B)G\n" +
-                    "G)H\n" +
-                    "D)I\n" +
-                    "E)J\n" +
-                    "J)K\n" +
-                    "K)L")
+            val numberOfOrbits = mapper.numberOfOrbits("""
+                        COM)B
+                        B)C
+                        C)D
+                        D)E
+                        E)F
+                        B)G
+                        G)H
+                        D)I
+                        E)J
+                        J)K
+                        K)L
+                    """)
             numberOfOrbits shouldBe 42
         }
 
@@ -81,6 +83,14 @@ class OrbitMapperTest : StringSpec()  {
                 mapper.numberOfOrbits("xyz")
             }
             exception.message should startWith("Invalid orbit definition")
+        }
+
+        "empty lines in orbit maps are ignored." {
+            mapper.numberOfOrbits("\nA)B") shouldBe 1
+        }
+
+        "lines with blanks in orbit maps are ignored." {
+            mapper.numberOfOrbits("  \nA)B") shouldBe 1
         }
     }
 

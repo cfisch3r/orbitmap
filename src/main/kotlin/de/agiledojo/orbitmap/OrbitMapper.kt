@@ -6,16 +6,9 @@ class OrbitMapper {
         if (orbitmap.isEmpty())
             return 0
 
-        val orbits = orbitsFromMap(orbitmap)
+        val orbits = OrbitMapParser.orbitsFromMap(orbitmap)
 
         return orbits.fold(orbits.size,{ orbitcount,orbit-> orbitcount + orbits.indirectOrbits(orbit)})
-    }
-
-    private fun orbitsFromMap(orbitmap: String): List<Orbit> {
-        return orbitmap
-                .split("\n")
-                .distinct()
-                .map { line -> Orbit(line) }
     }
 
     private fun List<Orbit>.indirectOrbits(otherOrbit: Orbit): Int {
