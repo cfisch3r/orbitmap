@@ -18,15 +18,15 @@ class OrbitMapperTest : StringSpec()  {
 
     init {
 
-        "Sum of orbits should be 0 for an empty Orbit Map" {
+        "number of orbits should be 0 for an empty Orbit Map" {
             mapper.numberOfOrbits("") shouldBe 0
         }
 
-        "Sum of orbits should be 1 for an Orbit Map with 1 orbit" {
+        "number of orbits should be 1 for an Orbit Map with 1 orbit" {
             mapper.numberOfOrbits("A)B") shouldBe 1
         }
 
-        "Sum of orbits should be 2 for an Orbit Map with 2 independent Orbits" {
+        "number of orbits should be 2 for an Orbit Map with 2 independent Orbits" {
             mapper.numberOfOrbits("""
                 A)B
                 C)D
