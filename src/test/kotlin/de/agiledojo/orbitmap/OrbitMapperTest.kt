@@ -27,35 +27,56 @@ class OrbitMapperTest : StringSpec()  {
         }
 
         "Sum of orbits should be 2 for an Orbit Map with 2 independent Orbits" {
-            mapper.numberOfOrbits("A)B\nC)D") shouldBe 2
+            mapper.numberOfOrbits("""
+                A)B
+                C)D
+            """) shouldBe 2
         }
 
         "2 identical orbits should be counted as one" {
-                mapper.numberOfOrbits("A)B\nC)D\nA)B") shouldBe 2
+            mapper.numberOfOrbits("""
+                A)B
+                C)D
+                A)B
+            """) shouldBe 2
         }
 
         "single indirect orbit is counted" {
-            val numberOfOrbits = mapper.numberOfOrbits("N)M\nB)C\nY)X\nA)B")
-            numberOfOrbits shouldBe 5
+            mapper.numberOfOrbits("""
+                N)M
+                B)C
+                Y)X
+                A)B
+            """) shouldBe 5
         }
 
         "multiple indirect orbits are counted" {
-            val numberOfOrbits = mapper.numberOfOrbits("N)M\nA)B\nY)X\nB)C\nB)D")
-            numberOfOrbits shouldBe 7
+            mapper.numberOfOrbits("""
+                N)M
+                A)B
+                Y)X
+                B)C
+                B)D
+            """) shouldBe 7
         }
 
         "transient indirect orbits are counted" {
-            val numberOfOrbits = mapper.numberOfOrbits("A)B\nB)C\nC)D")
-            numberOfOrbits shouldBe 6
+            mapper.numberOfOrbits("""
+                A)B
+                B)C
+                C)D
+            """) shouldBe 6
         }
 
         "object with two objects in direct orbit" {
-            val numberOfOrbits = mapper.numberOfOrbits("A)B\nA)C")
-            numberOfOrbits shouldBe 2
+            mapper.numberOfOrbits("""
+                A)B
+                A)C
+            """) shouldBe 2
         }
 
         "complex example should work" {
-            val numberOfOrbits = mapper.numberOfOrbits("""
+            mapper.numberOfOrbits("""
                         COM)B
                         B)C
                         C)D
@@ -67,8 +88,7 @@ class OrbitMapperTest : StringSpec()  {
                         E)J
                         J)K
                         K)L
-                    """)
-            numberOfOrbits shouldBe 42
+                    """) shouldBe 42
         }
 
         "objects cannot be in their own orbit" {
