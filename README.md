@@ -1,4 +1,4 @@
-= Orbit Map Kata
+# Orbit Map Kata
 
 This Kata is inspired by a [puzzle](https://adventofcode.com/2019/day/6) from the [Advent of Code site](https://adventofcode.com/).
 
