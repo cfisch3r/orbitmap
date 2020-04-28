@@ -1,6 +1,8 @@
 # Orbit Map Kata
  first change
 
+changes from dev2
+
 This Kata is inspired by a [puzzle](https://adventofcode.com/2019/day/6) from the [Advent of Code site](https://adventofcode.com/).
 feature added
 You have to implement a function which calculates the sum of orbits defined in a map. This map contains a list of orbital relationships between celestial objects. For example:
